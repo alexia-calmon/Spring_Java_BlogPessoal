@@ -6,7 +6,10 @@ package com.generation.blogpessoal.repository;
 
 import com.generation.blogpessoal.model.Postagem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 /*A Anotação (Annotation) @Repository indica que a Interface é do tipo repositório,
@@ -15,6 +18,7 @@ e das Query Methods, que são Métodos personalizados que geram consultas (Instr
 através da combinação de palavras chave, que representam os comandos da linguagem SQL. */
 
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
+    public List <Postagem> findAllByTituloContainingIgnoreCase(@Param("titulo") String titulo);
 
 }
 /* Observe que na declaração da Interface foi adicionada a Herança através da palavra reservada extends com a Interface JpaRepository, que recebe 2 parâmetros:
