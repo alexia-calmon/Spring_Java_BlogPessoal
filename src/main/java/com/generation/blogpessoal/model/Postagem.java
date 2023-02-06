@@ -1,5 +1,6 @@
 package com.generation.blogpessoal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -33,10 +34,21 @@ public class Postagem {
     //Seta a hora exata de acordo com o computador e coloca na postagem - tipo Facebook
     private LocalDateTime data;
 
+    @ManyToOne
+     /* A anotação @ManyToOne indica que a Classe Postagem será o lado N:1 e terá um Objeto da Classe Tema, que no modelo Relacional será a
+    Chave Estrangeira na Tabela tb_postagens (tema_id). */
+    @JsonIgnoreProperties("postagem")
+    /* indica que uma parte do JSON será ignorado, ou seja, como a Relação entre as Classes será do tipo Bidirecional, ao listar o
+    Objeto Postagem numa consulta, por exemplo, o Objeto Tema, que será criado na linha 39, será exibido como um "Sub Objeto" do Objeto
+    Postagem, como mostra a figura abaixo, devido ao Relacionamento que foi criado. */
+    private Tema tema;
+    /*Será criado um Objeto da Classe Tema, que receberá os dados do Tema associado ao Objeto da Classe Postagem.
+    Este Objeto representa a Chave Estrangeira da Tabela tb_postagens (tema_id). */
+
 
     /*Getters and setters - Acessar às variáveis de qualquer lugar do projeto, pois são privadas*/
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -44,7 +56,7 @@ public class Postagem {
     }
 
     public String getTitulo() {
-        return titulo;
+        return this.titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -52,7 +64,7 @@ public class Postagem {
     }
 
     public String getTexto() {
-        return texto;
+        return this.texto;
     }
 
     public void setTexto(String texto) {
@@ -60,10 +72,19 @@ public class Postagem {
     }
 
     public LocalDateTime getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(LocalDateTime data) {
         this.data = data;
     }
+
+    public Tema getTema() {
+        return tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
+
 }
