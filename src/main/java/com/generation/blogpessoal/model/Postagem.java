@@ -46,7 +46,22 @@ public class Postagem {
     Este Objeto representa a Chave Estrangeira da Tabela tb_postagens (tema_id). */
 
 
+
+/*A Classe Postagem será o lado N:1, ou seja, Muitas Postagens podem ter apenas Um Usuario. */
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     /*Getters and setters - Acessar às variáveis de qualquer lugar do projeto, pois são privadas*/
+    /* SET [modificar os atributos] - - GET [ler os dados dos atributos] */
     public Long getId() {
         return this.id;
     }

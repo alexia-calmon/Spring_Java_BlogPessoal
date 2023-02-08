@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 /* Define que a Classe é do tipo RestController e receberá requisições compostas por URL (endpoint), Verbo (método HTTP) e Corpo da Requisição (Request Body), objeto
 que contém os dados que serão persistidos no banco de dados. Nem toda requisição enviará dados no Request Body.
-Ao receber a requisição, a classe Controladora responserá com: um código de status HTTP pertinente a operação realizada e o resultado do processamento
+Ao receber a requisição, a classe Controladora responderá com: um código de status HTTP pertinente a operação realizada e o resultado do processamento
 ((Objetos de uma Classe, por exemplo) inserido diretamente no corpo da resposta (Response Body) */
 
 @RequestMapping("/postagens")
@@ -29,6 +29,7 @@ o Spring envia a requisição para a Classe responsável pelo Recurso associado 
 É essencial para que o front-end tenha acesso à aplicação (construir a API). Além de liberar todas as origens das requisições (parâmetro origins), a anotação
 libera também os Cabeçalhos das Requisições (allowedHeaders), que trazem infos essenciais para o correto funcionamento da aplicação.
 Em produção, recomenda-se substituir o * pelo endereço do deploy do front. */
+
 public class PostagemController {
     @Autowired
     /* Injeção de Dependência - É a implementação utilizada pelo Spring para aplicar a Inversão de Controle (IoC) quando necessário. Ela define quais Classes
@@ -40,7 +41,7 @@ Métodos Construtores na Classe Model ou Criar/Instaciar Objetos de forma manual
 
     @Autowired
     private TemaRepository temaRepository;
-    /* Para termos acesso aos Métodos das Classes Tema e TemaController, precisamos inserir uma uma Injeção de Dependência dio Recurso Tema,
+    /* Para termos acesso aos Métodos das Classes Tema e TemaController, precisamos inserir uma uma Injeção de Dependência do Recurso Tema,
      logo abaixo da uma Injeção de Dependência do Recurso Postagem. */
 
 
@@ -67,6 +68,7 @@ Métodos Construtores na Classe Model ou Criar/Instaciar Objetos de forma manual
     pelo id (Identificador único do Objeto). Traçando um paralelo com o MySQL, seria o equivalente a instrução: SELECT * FROM tb_postagens where id = id;
     Para processar o Método findById(Long id), vamos utilizar dois recursos da Linguagem Java, que tornam o código mais limpo e assertivo:
     São os recursos Optional e Expressões Lambda. */
+
     @GetMapping("/{id}")
     /*A anotação @GetMapping("/{id}") mapeia todas as Requisições HTTP GET, enviadas para um endereço específico (Endpoint), dentro do Recurso Postagem,
     para um Método específico que responderá as requisições, ou seja, ele indica que o Método getById( Long id ), responderá a todas as requisições
@@ -96,7 +98,7 @@ Métodos Construtores na Classe Model ou Criar/Instaciar Objetos de forma manual
 
     @GetMapping("/titulo/{titulo}")
     /*A anotação @GetMapping indica que o Método getAll(), responderá a todas as requisições do tipo HTTP GET, enviadas no endereço
-     http://localhost:8080/postagens/titulo/postagem.
+     http://localhost:8080/postagens/titulo/esporte.
 
      */
     public ResponseEntity<List<Postagem>> getByTitulo(@PathVariable String titulo) {

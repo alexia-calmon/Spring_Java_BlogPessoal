@@ -1,41 +1,27 @@
 package com.generation.blogpessoal.model;
 
-import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.UpdateTimestamp;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 @Entity
-@Table(name = "tb_postagens")
-public class Postagem {
+@Table(name = "tb_temas")
+public class Tema {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O Atributo título é Obrigatório!")
-    @Size(min = 5, max = 100, message = "O Atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
-    private String titulo;
+    @NotNull(message = "O Atributo Descrição é obrigatório")
+    private String descricao;
 
-    @NotBlank(message = "O Atributo texto é Obrigatório!")
-    @Size(min = 10, max = 1000, message = "O Atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
-    private String texto;
+    @OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("tema")
+    private List<Postagem> postagem;
 
-    @UpdateTimestamp
-    private LocalDateTime data;
 
-    @ManyToOne
-    @JsonIgnoreProperties("postagem")
-    private Tema tema;
-
-    @ManyToOne
-    @JsonIgnoreProperties("postagem")
-    private Usuario usuario;
-
-    /*Insira os Getters and Setters*/
 
     public Long getId() {
         return this.id;
@@ -45,44 +31,21 @@ public class Postagem {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return this.titulo;
+
+    public String getDescricao() {
+        return this.descricao;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getTexto() {
-        return this.texto;
+    public List<Postagem> getPostagem() {
+        return this.postagem;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    public LocalDateTime getData() {
-        return this.data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public Tema getTema() {
-        return this.tema;
-    }
-
-    public void setTema(Tema tema) {
-        this.tema = tema;
-    }
-
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPostagem(List<Postagem> postagem) {
+        this.postagem = postagem;
     }
 
 }

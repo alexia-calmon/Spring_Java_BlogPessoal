@@ -22,10 +22,10 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 
 }
 /* Observe que na declaração da Interface foi adicionada a Herança através da palavra reservada extends com a Interface JpaRepository, que recebe 2 parâmetros:
-A Classe Postagem, que é a Entidade que será mapeada em nosso Banco de dados (Lembre-se que a Classe Postagem foi quem gerou a nossa tabela tb_postagens)
-O Long representa a nossa Chave Primária (Primary Key), que é o Atributo que recebeu a anotação @Id na nossa Classe Postagem
+A Classe Postagem, que é a Entidade que será mapeada em nosso Banco de dados (Lembre-se que a Classe Postagem foi quem gerou a nossa tabela
+tb_postagens) O Long representa a nossa Chave Primária (Primary Key), que é o Atributo que recebeu a anotação @Id na nossa Classe Postagem
 (o Atributo também se chama id em nossa Classe Postagem).
 Estes 2 parâmetros são do tipo Java Generics (podem receber qualquer tipo de Objeto <T, T>).
-Dentro contexto do JPA são o mínimo necessário para executar os Métodos padrão da Interface Repository, que serão implementados na próxima etapa na
-Classe PostagemController. Estes Métodos básicos já ficam automaticamente disponíveis no Recurso Postagem a partir do momento que a Interface PostagemRepository
-herda a Interface JpaRepository. */
+Dentro contexto do JPA são o mínimo necessário para executar os Métodos padrão da Interface Repository, que serão implementados na próxima
+etapa na Classe PostagemController. Estes Métodos básicos já ficam automaticamente disponíveis no Recurso Postagem a partir do
+momento que a Interface PostagemRepository herda a Interface JpaRepository. */
